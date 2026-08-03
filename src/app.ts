@@ -1,11 +1,10 @@
 import { fastify } from 'fastify'
-
+import { db } from '../database.ts'
 
 
 const server = fastify()
-
-server.get('/hello', async (_request, reply) => {
-  return reply.send('Ola')
+server.get('/transactions', async () => {
+  const transaction = await db('transactions').select('*') 
+  return transaction
 })
-
 export default server
