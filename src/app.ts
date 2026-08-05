@@ -1,10 +1,9 @@
 import { fastify } from 'fastify'
-import { db } from '../database.ts'
+import { transactionRoutes } from './routes/transaction.ts'
 
 
 const server = fastify()
-server.get('/transactions', async () => {
-  const transaction = await db('transactions').select('*') 
-  return transaction
-})
+
+server.register(transactionRoutes, { prefix: '/api' })
+
 export default server
