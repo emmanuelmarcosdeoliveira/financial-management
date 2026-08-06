@@ -13,3 +13,12 @@
 - [ ] O usuário só pode visualizar transações o qual ele criou
 
 ## Requisitos não funcionais
+
+`O que compõe as transactions:`
+
+id: number
+title: string
+type: 'income' | 'outcome'
+price: number
+category: string
+createAt: string
