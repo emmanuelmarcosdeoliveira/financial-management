@@ -38,7 +38,14 @@ const transactionBodySchema =  z.object({
 })
 const { title, price, type, category, createdAt}  = transactionBodySchema.parse(request.body)  
 
-
+// utilizando cookie
+let sessionId = request.cookies.sessionId
+if(!sessionId) {
+  sessionId = crypto.randomUUID()
+  reply.cookie('sessionId', sessionId, {
+    path: '/', maxAge:  60 * 60 * 24 * 7 // estamos salvando o cookie por 7 dias
+  })
+}
 
  await db('transactions').insert({
   id: crypto.randomUUID(),
@@ -46,7 +53,8 @@ const { title, price, type, category, createdAt}  = transactionBodySchema.parse(
   price, 
   type: type === 'income' ? 'income' : 'outcome',
   category,
-  created_at: createdAt 
+  created_at: createdAt, 
+  session_id: sessionId
  })
 return reply.status(201).send()
 })
@@ -60,6 +68,4 @@ return reply.status(201).send()
       summary
     }
   })
-
-
 }
