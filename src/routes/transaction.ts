@@ -50,4 +50,16 @@ const { title, price, type, category, createdAt}  = transactionBodySchema.parse(
  })
 return reply.status(201).send()
 })
+
+  // Visualizar o resumo das transações
+  server.get('/summary',  async () => {
+    const summary = await db('transactions')
+    .sum('price', { as: 'amount' })
+    .first()
+    return {
+      summary
+    }
+  })
+
+
 }
