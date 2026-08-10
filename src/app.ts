@@ -17,4 +17,6 @@ server.get('/api/health', async () => {
 
 server.register(transactionRoutes, { prefix: '/api' })
 
-export default server
+export {
+server
+} 
