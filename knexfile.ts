@@ -1,5 +1,5 @@
 import type { Knex } from 'knex'
-import { env } from './src/env/env.ts'
+import { env } from './src/env/index.ts'
 
 
 const config: Knex.Config = {
