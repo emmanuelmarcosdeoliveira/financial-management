@@ -48,4 +48,70 @@ it('should be able to list all transactions', async  ()  => {
     })
   ])
 })
+
+
+
+it('should be able to get a specific transaction', async  ()  => {
+  const createTransactionResponse = await request(server.server)
+  .post('/api/transactions').send({
+    title: 'Criação App Desktop',
+    price: 8000,
+    type: 'income', 
+    category: 'Vendas'
+  })
+  const cookies = createTransactionResponse.get('Set-Cookie')
+
+  const listTransactionsResponse = await request(server.server)
+   .get('/api/transactions')
+   .set('Cookie', cookies!)
+   .expect(200)
+
+  const transactionsId = listTransactionsResponse.body.transactions[0].id
+
+
+  const getTransactionsResponse = await request(server.server)
+   .get(`/api/transactions/${transactionsId}`)
+   .set('Cookie', cookies!)
+   .expect(200)
+   
+
+  expect(getTransactionsResponse.body.transaction).toEqual(
+    expect.objectContaining({
+      title: 'Criação App Desktop',
+      price: 8000,
+      type: 'income', 
+      category: 'Vendas'
+    })
+  )
+})
+
+
+it('should be able to get a summary', async  ()  => {
+  const createTransactionResponse = await request(server.server)
+  .post('/api/transactions').send({
+    title: 'Criação App Desktop',
+    price: 8000,
+    type: 'income', 
+    category: 'Vendas'
+  })
+  const cookies = createTransactionResponse.get('Set-Cookie')
+
+  await request(server.server)
+  .post('/api/transactions')
+  .set('Cookie', cookies!)
+  .send({
+    title: 'Criação  Dashboard',
+    price: 2000,
+    type: 'income', 
+    category: 'Vendas'
+  })
+    const summaryResponse = await request(server.server)
+   .get('/api/summary')
+   .set('Cookie', cookies!)
+   .expect(200)
+
+  expect(summaryResponse.body.summary).toEqual({
+    amount: 10000
+})
+})
 })
