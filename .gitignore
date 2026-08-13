@@ -1,0 +1,11 @@
+# Dependencies 
+node_modules
+# Database
+database/*.db
+# Environment 
+.env
+.env.test
+# Tests
+coverage
+# Build
+build
