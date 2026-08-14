@@ -1,5 +1,6 @@
-import server from './app.ts'
+import {server} from './app.ts'
+import { env } from './env/index.ts'
 
-server.listen({ port: 3333 }).then(() => {
-  console.log('🔥Server is running in http://localhost:3333 ')
+server.listen( {port: env.PORT} ).then(() => {
+    console.log(`🔥Server is test in http://localhost:${env.PORT}/api/health`)
 })

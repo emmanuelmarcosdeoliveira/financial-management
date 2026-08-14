@@ -1,3 +1,11 @@
+# Dependencies 
 node_modules
+# Database
+database/*.db
+# Environment 
 .env
-src/tmp/app.db
+.env.test
+# Tests
+coverage
+# Build
+build

@@ -5,13 +5,33 @@ import { defineConfig } from 'eslint/config'
 
 export default defineConfig([
   {
+    ignores: [
+      'node_modules/',
+      'build/',
+      'coverage/',
+    ],
+  },
+
+  {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-    plugins: { js },
-    extends: ['js/recommended'],
+
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+    ],
+
+    languageOptions: {
+      globals: globals.node,
+    },
+
     rules: {
-      'no-unused-vars': 'warn',
-      'no-undef': 'warn',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+
+      'no-undef': 'off',
+
       semi: ['error', 'never'],
+
       quotes: [
         'error',
         'single',
@@ -20,7 +40,5 @@ export default defineConfig([
         },
       ],
     },
-    languageOptions: { globals: globals.node },
   },
-  tseslint.configs.recommended,
 ])

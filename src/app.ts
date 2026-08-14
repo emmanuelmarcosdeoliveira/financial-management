@@ -1,14 +1,22 @@
 import { fastify } from 'fastify'
-import { database } from './database.ts'
+import { transactionRoutes } from './routes/transaction.ts'
+import cookie from '@fastify/cookie'
 
 
 const server = fastify()
 
-server.get('/hello', async () => {
-  //return reply.send('Ola')
-  
-   const tables  = await database('sqlite_schema').select('*')
-   return tables
+server.register(cookie)
+// exemplo de middleware para todas as requisições
+server.addHook('preHandler', async (request ) => {
+  console.log(`[${request.method}] ${request.url}`)
 })
 
-export default server
+server.get('/api/health', async () => {
+  return { message: 'status: ok' }
+})
+
+server.register(transactionRoutes, { prefix: '/api' })
+
+export {
+server
+} 
