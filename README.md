@@ -9,7 +9,7 @@
 
 Uma API REST robusta para gerenciar transações financeiras, desenvolvida com **Fastify**, **TypeScript** e **SQLite/PostgreSQL**.
 
-[Características](#características) • [Tecnologias](#tecnologias) • [Instalação](#instalação) • [Uso](#uso) • [Endpoints](#endpoints) • [Contribuindo](#contribuindo)
+[Diagrama de Rotas](#diagrama-de-rotas) • [Características](#características) • [Tecnologias](#tecnologias) • [Instalação](#instalação) • [Uso](#uso) • [Endpoints](#endpoints) • [Contribuindo](#contribuindo)
 
 </div>
 
@@ -20,6 +20,28 @@ Uma API REST robusta para gerenciar transações financeiras, desenvolvida com *
 Uma aplicação de backend desenvolvida como projeto de **aprendizado e portfólio** durante a formação Node.js da Rocketseat. A API oferece funcionalidades essenciais para gerenciar transações financeiras (receitas e despesas), com suporte a cookie-based sessions para rastreamento de usuários.
 
 **Público-alvo:** Desenvolvedores e recrutadores interessados em conhecer a implementação de uma API REST profissional.
+
+---
+
+## 🗺️ Diagrama de Rotas
+
+Esta API possui 4 principais rotas de transações financeiras, cada uma com uma função específica:
+
+- **GET `/transactions`** - Lista todas as transações do usuário
+- **GET `/transactions/:id`** - Busca uma transação específica por ID
+- **POST `/transactions`** - Cria uma nova transação financeira
+- **GET `/summary`** - Retorna um resumo com o saldo total das transações
+
+Todas as rotas de consulta (`GET`) utilizam cookie-based sessions para identificar o usuário. O fluxo completo, incluindo diagramas interativos e exemplos de requisições, está disponível no arquivo de documentação detalhada:
+
+### 📊 [Visualizar Diagrama Detalhado](ROUTES_DIAGRAM.md)
+
+O diagrama inclui:
+
+- 📈 Fluxo visual das principais rotas
+- 🔄 Diagrama de sequência de dados
+- 💻 Exemplos práticos de requisições
+- 🔐 Detalhes sobre middleware de segurança
 
 ---
 
